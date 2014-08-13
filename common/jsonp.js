@@ -58,7 +58,7 @@
 			window[name] = function (json) {
 				window[name] = null;
 
-				var element = document.getElementById('id-' + that.callbackName);
+				var element = document.getElementById('id_' + that.callbackName);
 				that.removeScriptTag(element);
 
 				//真正的处理返回的数据的函数
