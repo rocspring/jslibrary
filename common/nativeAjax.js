@@ -19,7 +19,7 @@
 		this.data = opts.data || '';
 		this.dataType = opts.dataType || 'json';
 		this.async = opts.async || true;
-		this.success = opts.success;
+		this.success = opts.success || null;
 		this.error = opts.error;
 
 		this.XHR = null;
@@ -56,7 +56,7 @@
 			if ( this.type === 'get' || this.type === 'GET' ) {
 				this.type = 'GET';
 				if (this.data) {
-					this.url = this.url + '?' + params(this.data);
+					this.url = this.url + (this.url.indexOf('?') === -1 ? '?' : '&') + params(this.data);
 				}
 			}else if ( this.type === 'post' || this.type === 'POST' ) {
 				this.type = 'POST';
@@ -106,6 +106,8 @@
 					this.success(eval('(' + XHR.responseText + ')'));
 				}
 			}
+
+
 		}
 
 	};
