@@ -3,6 +3,10 @@
 *@author：wshp
 *@E-mail: wshp000000@gmail.com
 *version: 1.0.0
+*
+*逐步需要添加的功能：
+*1.支持complate,error函数
+*2.支持jsonp
 **/
 
 (function (window) {
