@@ -13,6 +13,8 @@ jslibrary
 
 * nativeAjax.js : ajax的原生实现
 
+* customEvent.js : 自定义事件的封装，采用观察者模式
+
 
 ##lib(js的常用组件)
 
