@@ -143,5 +143,8 @@
 		}
 	}
 
+	CustomEvent.prototype.on = CustomEvent.prototype.addEvent;
+	CustomEvent.prototype.off = CustomEvent.prototype.removeEvent;
+
 	window.CustomEvent = CustomEvent;
 })(window);
