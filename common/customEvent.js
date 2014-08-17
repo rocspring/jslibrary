@@ -3,7 +3,7 @@
 *观察者模式的具体实现
 *@author: wshp
 *@E-mail: wshp000000@gmail.com
-*@version : 0.0.1
+*@version : 0.0.2
 **/
 
 ;(function () {
@@ -20,22 +20,25 @@
 
 		constructor: CustomEvent,
 
-		//注册一个自定义事件
+		//注册自定义事件
 		addEvent : function ( eventName, func ) {
+			var args = arguments,
+				argsLen = args.length,
+				i, len;
 			if ( typeof eventName === 'string' && typeof func === 'function' ) {
 				if ( typeof this.eventList[eventName] === 'undefined' ) {
-					this.eventList[eventName] = [func];
-				}else {
-					this.eventList[eventName].push(func);
+					this.eventList[eventName] = [];
 				}
+
+				for( i = 1, len = argsLen; i < len; i++){
+					this.eventList[eventName].push(args[i]);
+				}
+
 			}
 
 			return this;
 		},
 
-		addEvents : function () {
-			
-		},
 
 		//触发自定义事件
 		fire : function ( eventName , func ) {
@@ -86,11 +89,8 @@
 			}
 
 			return this;
-		},
-
-		removeEvents : function () {
-			
 		}
+
 	};
 
 
