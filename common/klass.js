@@ -13,7 +13,7 @@
 /*
 *	实现后的使用方法
 *	1.直接继承自基类Klass
-*	var First = Klass({});
+*	var First = new Klass({});
 *	2.继承自其它的类
 *	var Two = First.klass({});
 *
@@ -26,7 +26,7 @@
 
 	function Klass ( ) {}
 
-	Klass.klass = function ( param ){
+	Klass.birth = function ( param ){
 
 		var obj = typeof param === 'object' ? param : {},
 			_super = this.prototype; //父类的原型对象
@@ -73,7 +73,7 @@
 
 		F.prototype = proto;
 		F.prototype.constructor = F;
-		F.klass = arguments.callee;
+		F.birth = arguments.callee;
 
 		return F;
 	};
