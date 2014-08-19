@@ -24,53 +24,48 @@
 	var initializing = true,
 		fnTest = /xyz/.test(function () { 'xyz';}) ? /\b_super\b/ : /.*/;//判断浏览器是否支持函数序列化
 
-	function Klass ( param ) {
+	function Klass ( ) {}
 
-		var obj = typeof param === 'object' ? param : {};
+	Klass.klass = function ( param ){
+
+		var obj = typeof param === 'object' ? param : {},
+			_super = this.prototype; //父类的原型对象
+
+		initializing = true;
+		//保存父类的实例
+		var proto = new this();
+		initializing = false;
+
+		//如果传入的方法或属性和父类的方法或属性同名时，覆盖父类的方法或属性
+		var i;
+		for( i in param ){
+
+			if ( typeof _super[i] === 'function' && typeof param[i] === 'function' && fnTest.test(param[i])) {
+
+			}
+		}
 
 		function F (){
 			if( !initializing && this.init ){
 				this.init();
 			}
 		}
-		F.prototype = obj;
+
+		F.prototype = new this();
 		F.prototype.constructor = F;
+		F._super = super;
+		extend( F.prototype, obj );
 
-		F.klass = function (){
-
-			var obj = typeof param === 'object' ? param : {};
-
-			initializing = true;
-
-			var super = new this();
-
-			initializing = false;
-
-			function F (){
-				if( !initializing && this.init ){
-					this.init();
-				}
-			}
-
-			F.prototype = new this();
-			F.prototype.constructor = F;
-			F._super = super;
-			extend( F.prototype, obj );
-
-			F.klass = this.klass;
-
-			return F;
-		};
+		F.klass = this.klass;
 
 		return F;
-
-	}
+	};
 	
 	function extend ( c, p ){
 		if ( typeof c === 'object' && typeof p === 'object' ) {
 			var i;
 			for( i in p ){
-				if( p.hasOwenPrototype(i) ){
+				if( p.hasOwnProperty(i) ){
 					c[i] = p[i];
 				}
 			}
