@@ -42,6 +42,23 @@
 
 			if ( typeof _super[i] === 'function' && typeof param[i] === 'function' && fnTest.test(param[i])) {
 
+				proto[i] = (function(i, func){
+					return function() {
+						var temp = this._super;
+
+						this._super = _super[i];
+
+						var ret = func.apply( this, arguments );
+
+						this._super = temp;
+
+						return ret;
+					};
+
+				})( i, param[i] );
+
+			}else{
+				proto[i] = param[i];
 			}
 		}
 
@@ -51,27 +68,13 @@
 			}
 		}
 
-		F.prototype = new this();
+		F.prototype = proto;
 		F.prototype.constructor = F;
-		F._super = super;
-		extend( F.prototype, obj );
-
-		F.klass = this.klass;
+		F.klass = arguments.callee;
 
 		return F;
 	};
 	
-	function extend ( c, p ){
-		if ( typeof c === 'object' && typeof p === 'object' ) {
-			var i;
-			for( i in p ){
-				if( p.hasOwnProperty(i) ){
-					c[i] = p[i];
-				}
-			}
-		}
-	}
-
 	window.Klass = Klass;
 })();
 
