@@ -13,9 +13,9 @@
 /*
 *	实现后的使用方法
 *	1.直接继承自基类Klass
-*	var First = new Klass({});
+*	var First =  Klass.birth({});
 *	2.继承自其它的类
-*	var Two = First.klass({});
+*	var Two = First.birth({});
 *
 **/
 
