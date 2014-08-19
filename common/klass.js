@@ -46,6 +46,9 @@
 					return function() {
 						var temp = this._super;
 
+						//修改this._super的指向，目的是使得可以在实例的方法执行过程中，
+						//调用this._super()方法，即父类中保存的方法。
+						//执行完后，this._super仍然是指向父类的原型对象
 						this._super = _super[i];
 
 						var ret = func.apply( this, arguments );
