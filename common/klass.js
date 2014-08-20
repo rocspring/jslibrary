@@ -38,9 +38,9 @@
 
 		//如果传入的方法或属性和父类的方法或属性同名时，覆盖父类的方法或属性
 		var i;
-		for( i in param ){
+		for( i in obj ){
 
-			if ( typeof _super[i] === 'function' && typeof param[i] === 'function' && fnTest.test(param[i])) {
+			if ( typeof _super[i] === 'function' && typeof obj[i] === 'function' && fnTest.test(obj[i])) {
 
 				proto[i] = (function(i, func){
 					return function() {
@@ -58,10 +58,10 @@
 						return ret;
 					};
 
-				})( i, param[i] );
+				})( i, obj[i] );
 
 			}else{
-				proto[i] = param[i];
+				proto[i] = obj[i];
 			}
 		}
 
