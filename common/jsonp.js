@@ -2,7 +2,7 @@
 *jsonp的封装
 *@author: wshp
 *@E-mail: wshp000000@gmail.com
-*@version: 1.0.0
+*@version: 1.1.0
 **/
 
 ;(function () {
@@ -12,6 +12,7 @@
 		this.url = opts.url || '';
 		this.data = opts.data || null;
 		this.success = opts.success || null;
+		this.error = opts.error || null;
 
 		this.callbackName = '';
 
@@ -26,7 +27,7 @@
 		},
 
 		setParams : function () {
-			this.url = this.url + (this.url.indexOf('?') === -1 ? '?' : '&') + params(this.data) + (new Date() * 1);
+			this.url = this.url + (this.url.indexOf('?') === -1 ? '?' : '&') + params(this.data) + '&_time_=' + (new Date() * 1);
 
 			if (/callback=(\w+)/.test(this.url)) {
 				this.callbackName = RegExp.$1;
@@ -49,9 +50,10 @@
 
 		createScriptTag : function () {
 			var that = this,
-				scriptTag = document.createElement('script');
+				scriptTag = document.createElement('script'),
+				name = that.callbackName;
 
-			scriptTag.type = 'text/script';
+			// scriptTag.type = 'text/script';
 			scriptTag.src = that.url;
 			scriptTag.id = 'id_' + that.callbackName;
 
@@ -64,6 +66,8 @@
 				//真正的处理返回的数据的函数
 				that.success(json);
 			};
+
+			scriptTag.onerror = that.error;
 
 			return scriptTag;
 		},
@@ -84,7 +88,7 @@
 	//把对象转换为序列化的字符串
 	function params (obj) {
 		var i,
-			arr;
+			arr = [];
 
 		if ( typeof obj === 'object' && !!obj ) {
 			for( i in obj ){
