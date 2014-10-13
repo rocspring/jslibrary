@@ -9,7 +9,6 @@
 	var navigator = window.navigator,
 		msPointerEnabled = navigator.msPointerEnabled;
 
-
 	/*
 	*移动端的touch事件
 	**/
@@ -77,6 +76,6 @@
 				transitionEndEvent : transitionEndEvent
 			};
 
-			})();
+		})();
 
 })(window);
