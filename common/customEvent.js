@@ -1,9 +1,9 @@
 /*
-*自定义事件的实现
-*观察者模式的具体实现
-*@author: wshp
-*@E-mail: wshp000000@gmail.com
-*@version : 0.0.2
+* 自定义事件的实现
+* 观察者模式的具体实现
+* @author: wshp
+* @E-mail: wshp000000@gmail.com
+* @version : 0.0.2
 **/
 
 ;(function () {

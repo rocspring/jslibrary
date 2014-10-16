@@ -1,7 +1,7 @@
 /*
 *前端开发一些常用的方法
-* @author wshp000000@gmail.com
-* version: 0.0.1
+* @author： wshp000000@gmail.com
+* @version: 0.0.1
 **/
 
 (function (window) {
@@ -9,9 +9,9 @@
 	var navigator = window.navigator,
 		msPointerEnabled = navigator.msPointerEnabled;
 
-	/*
-	*移动端的touch事件
-	**/
+        /*
+        * 移动端的touch事件
+        **/
 	var TOUCH_EVENTS = {
 			start : msPointerEnabled ? 'msPointerDown' : 'touchstart',
 			move : msPointerEnabled ? 'msPointerMove' : 'touchmove',
@@ -19,7 +19,7 @@
 		},
 
 		/*
-		*获取浏览器的样式的私有前缀
+		* 获取浏览器的样式的私有前缀
 		**/
 		vendor = (function(){
 			var domStyle = document.createElement('div').style,
@@ -63,6 +63,7 @@
 				}());
 
 			domStyle = null;
+
 			return {
 				attrPrefix : attrPrefix,
 				cssPrefix : cssPrefix,
@@ -76,6 +77,56 @@
 				transitionEndEvent : transitionEndEvent
 			};
 
-		})();
+		})(),
+
+        /*
+         * 数据类型的判断
+         **/
+        typeJudge = (function (){
+
+            var toString = Object.prototype.toString;
+
+            // 基本数据类型的判断
+            function isNumber ( p ) {
+                 return typeof p === 'number';
+            }
+
+            function isString ( p ) {
+                return typeof p === 'string';
+            }
+
+            function isUndefined ( p ) {
+                if( arguments.length === 0 ) return;
+                return p === void 1;
+            }
+
+            function isNull ( p ) {
+                return toString.call(p) === '[object Null]';
+            }
+
+            // 引用数据类型的判断
+            function isFunction ( p ) {
+                return typeof p === 'function';
+            }
+
+            function isObject ( p ) {
+                return toString.call(p) === '[object Object]';
+            }
+
+            function isArray ( p ) {
+                return toString.call(p) === '[object Array]';
+            }
+
+
+            return {
+                isNumber : isNumber,
+                isString : isString,
+                isUndefined : isUndefined,
+                isNull : isNull,
+                isFunction : isFunction,
+                isObject : isObject,
+                isArray : isArray
+            };
+        })()
 
 })(window);
