@@ -127,6 +127,6 @@
                 isObject : isObject,
                 isArray : isArray
             };
-        })()
+        })();
 
 })(window);
