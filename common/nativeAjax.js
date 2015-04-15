@@ -2,7 +2,7 @@
 *封装ajax
 *@author：wshp
 *@E-mail: wshp000000@gmail.com
-*version: 1.0.0
+*version: 1.0.1
 *
 *逐步需要添加的功能：
 *1.支持complate,error函数
@@ -115,16 +115,27 @@
 	//把对象转换为序列化的字符串
 	function params (obj) {
 		var i,
-			arr;
+			arr = [];
 
-		if ( typeof obj === 'object' && !!obj ) {
+		if ( typeof obj === 'object' && !!obj && obj !== {} ) {
 			for( i in obj ){
 				if (obj.hasOwnProperty(i)) {
 					arr.push(i + '=' + obj[i] );
 				}
 			}
 			return arr.join('&');
+		} else if ( obj === {} || obj === null ){
+			return '';
 		}
+	}
+
+	//指定函数的运行作用域
+	function  proxy ( fun, context ) {
+		var source = context || this;
+
+		return fun.bind ?  fun.bind(source) : function () {
+			fun.apply(source, arguments);
+		};
 	}
 
 	window.NativeAjax = NativeAjax;
