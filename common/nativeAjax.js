@@ -4,6 +4,8 @@
 *@E-mail: wshp000000@gmail.com
 *version: 1.0.1
 *
+*@1.0.1更新： 修改params功能函数的bug
+*
 *逐步需要添加的功能：
 *1.支持complate,error函数
 *2.支持jsonp
