@@ -4,8 +4,8 @@
  * @E-mail: wshp000000@gmail.com
  * @version: 1.2.1
  *
- * @version: 1.2.0  // 增加timeout事件
- * @version: 1.2.1  // 修改url属性名称错误的bug
+ * @version: 1.2.0 // 增加timeout事件
+ * @version: 1.2.1 // 修改url属性名称错误的bug
  **/
 
 ;(function() {
