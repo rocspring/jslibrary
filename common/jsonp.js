@@ -6,7 +6,7 @@
  *
  * @version: 1.2.0 // 增加timeout事件
  * @version: 1.2.1 // 修改url属性名称错误的bug
- * @version: 1.2.2 // 1.兼容url没有callback参数的情况 2.timeout和error事件对外提供一个error接口
+ * @version: 1.2.2 // 1.兼容url没有callback参数的情况 2.timeout和error事件对外仅提供一个error接口
  **/
 
 ;(function() {
