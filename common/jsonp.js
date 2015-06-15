@@ -6,6 +6,7 @@
  *
  * @version: 1.2.0 // 增加timeout事件
  * @version: 1.2.1 // 修改url属性名称错误的bug
+ * @version: 1.2.2 // 1.兼容url没有callback参数的情况 2.timeout和error事件对外提供一个error接口
  **/
 
 ;(function() {
@@ -16,7 +17,7 @@
 		this.data = opts.data || null;
 		this.success = opts.success || null;
 		this.error = opts.error || null;
-		this.timeout = opts.timeout || null;
+		this.timeout = opts.error || null;
 		this.time = opts.time || 3000;
 
 		this.callbackName = '';
@@ -34,13 +35,17 @@
 		setParams: function() {
 			this.url = this.url + (this.url.indexOf('?') === -1 ? '?' : '&') + params(this.data) + '&_time_=' + (new Date() * 1);
 
-			if (/callback=(\w+)/.test(this.url)) {
+			if ( /callback=(\w+)/.test(this.url) ) {
 				this.callbackName = RegExp.$1;
-			} else {
+			} else if ( /callback=/.test(this.url) ){
 				this.callbackName = 'jsonp_' + (new Date() * 1) + '_' + Math.random().toString().substring(2, 15);
 				this.url.replace('callback=?', 'callback=' + this.callbackName);
 				this.url.replace('callback=%3F', 'callback=' + this.callbackName);
+			} else {
+				this.callbackName = 'jsonp_' + (new Date() * 1) + '_' + Math.random().toString().substring(2, 15);
+				this.url += '&callback=' + this.callbackName;
 			}
+
 		},
 
 		createJsonp: function() {
