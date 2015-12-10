@@ -24,4 +24,6 @@ jslibrary
 
 * orientationChange.js : 屏幕旋转的事件封装
 
+* newExposureStatis.js : 新版的曝光统计组件，和公司的业务逻辑无关
+
 
